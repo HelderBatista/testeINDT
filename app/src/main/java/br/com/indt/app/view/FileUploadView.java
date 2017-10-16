@@ -39,6 +39,7 @@ public class FileUploadView {
 		this.service = service;
 	}
 
+	@SuppressWarnings("unchecked")
 	public void upload() throws IOException {
         if(file != null && file.getFileName().toUpperCase().endsWith(".TXT")) {
         	
@@ -46,6 +47,8 @@ public class FileUploadView {
         	
         	@SuppressWarnings("resource")
 			Scanner scanner = new Scanner(reader).useDelimiter("\\||\\r\\n");
+        	
+        	JSONObject json;
     		
     		try {
         	
@@ -56,38 +59,29 @@ public class FileUploadView {
             		String firstName = scanner.next();
             		String lastName = scanner.next();
             		
-            		JSONObject json = new JSONObject();
+            		json = new JSONObject();
             		
             		json.put("firstName",firstName);
             		json.put("lastName",lastName);
 					
             		this.service.inserirAutor(json.toString());
-            		
-            		System.out.println(type);
-            		System.out.println(firstName);
-            		System.out.println(lastName);
 				} else if (type.toLowerCase().equals("book")) {
 					String title = scanner.next();
 					String authorId = scanner.next();
             		
-            		JSONObject json = new JSONObject();
+            		json = new JSONObject();
             		
             		json.put("title",title);
             		json.put("authorId",authorId);
 					
             		this.service.inserirLivro(json.toString());
-            		
-            		
-            		System.out.println(type);
-            		System.out.println(title);
-            		System.out.println(authorId);
 				}
 			}
-            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Sucesso");
+        	
+            FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, "Sucesso", "Dados cadatrados com Sucesso");
             FacesContext.getCurrentInstance().addMessage(null, message);
 
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
         } else if (file.getFileName().equals("")) {
