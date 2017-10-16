@@ -1,1 +1,4 @@
-/target//.project/.classpath/.metadata/
+/target/
+/.metadata/
+/.classpath
+/.project
