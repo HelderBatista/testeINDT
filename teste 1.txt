@@ -1,0 +1,4 @@
+author|Jose|Rego
+author|Graciliano|Ramos
+author|Jorge|Amado
+book|As Tres Marias|12
